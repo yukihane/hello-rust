@@ -5,6 +5,7 @@ use std::fmt;
 
 fn main() {
     print();
+    print_enshu();
     print_display();
 }
 
@@ -50,6 +51,11 @@ fn print() {
     // 以下は動作しません。
     //    println!("This struct `{}` won't print...", Structure(3));
     // FIXME ^ Comment out this line.
+}
+
+fn print_enshu() {
+    let pi = 22.0 / 7.0;
+    println!("Pi is roughly {:.3}", pi);
 }
 
 // `fmt::Display`を実装するための構造体を定義します。
