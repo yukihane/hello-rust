@@ -8,4 +8,5 @@ fn main() {
     s02_01enum_use();
     s02_02c_like();
     linked_list();
+    s03constants();
 }
