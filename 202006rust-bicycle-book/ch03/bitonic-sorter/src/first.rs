@@ -31,7 +31,7 @@ mod tests {
 
     #[test]
     fn sort_u32_ascending() {
-        let mut x = vec![10, 20, 11, 20, 4, 330, 21, 110];
+        let mut x = vec![10, 30, 11, 20, 4, 330, 21, 110];
 
         sort(&mut x, true);
 
