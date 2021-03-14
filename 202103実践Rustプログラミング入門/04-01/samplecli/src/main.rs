@@ -1,7 +1,5 @@
-use std::{
-    fs::File,
-    io::{BufRead, BufReader},
-};
+use std::fs::File;
+use std::io::{stdin, BufRead, BufReader};
 
 use clap::Clap;
 
@@ -29,12 +27,13 @@ fn main() {
         let reader = BufReader::new(f);
         run(reader, opts.verbose);
     } else {
-        // ファイルを指定しなかった場合
-        println!("No file is specified");
+        let stdin = stdin();
+        let reader = stdin.lock();
+        run(reader, opts.verbose);
     }
 }
 
-fn run(reader: BufReader<File>, verbose: bool) {
+fn run<R: BufRead>(reader: R, verbose: bool) {
     for line in reader.lines() {
         let line = line.unwrap();
         println!("{}", line);
