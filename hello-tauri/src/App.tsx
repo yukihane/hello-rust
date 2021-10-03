@@ -1,3 +1,4 @@
+import { invoke } from "@tauri-apps/api";
 import ja from "date-fns/locale/ja";
 import React, { ChangeEvent, useState } from "react";
 import DatePicker, { registerLocale } from "react-datepicker"; // https://github.com/Hacker0x01/react-datepicker
@@ -15,6 +16,10 @@ function App() {
 
   const handleBirthDayChanged = (date: Date) => {
     setBirthDay(date);
+  };
+
+  const submit = () => {
+    invoke("greet", { personalData: { name, birthDay } });
   };
 
   return (
@@ -41,7 +46,7 @@ function App() {
             onChange={handleBirthDayChanged}
           />
         </div>
-        <input type="button" value="送信" />
+        <input type="button" value="送信" onClick={submit} />
       </div>
       <div style={{ padding: 10 }}>
         <input type="text" name="response" id="response" />
