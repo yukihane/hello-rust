@@ -6,9 +6,21 @@ import "react-datepicker/dist/react-datepicker.css";
 
 registerLocale("ja", ja);
 
+type Request = {
+  personalData: {
+    name: string;
+    birthDay: Date;
+  };
+};
+
+type Response = {
+  message: string;
+};
+
 function App() {
   const [name, setName] = useState("二宮尊徳");
   const [birthDay, setBirthDay] = useState(new Date("1787-09-04"));
+  const [message, setMessage] = useState("");
 
   const handleNameChanged = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -19,7 +31,12 @@ function App() {
   };
 
   const submit = () => {
-    invoke("greet", { personalData: { name, birthDay } });
+    const data: Request = { personalData: { name, birthDay } };
+    console.log("send: " + JSON.stringify(data));
+    invoke<Response>("greet", data).then((resp) => {
+      console.log("recv:" + JSON.stringify(resp));
+      setMessage(resp.message);
+    });
   };
 
   return (
@@ -49,7 +66,14 @@ function App() {
         <input type="button" value="送信" onClick={submit} />
       </div>
       <div style={{ padding: 10 }}>
-        <input type="text" name="response" id="response" />
+        <input
+          readOnly
+          type="text"
+          name="response"
+          id="response"
+          value={message}
+          style={{ width: 300 }}
+        />
       </div>
     </div>
   );
