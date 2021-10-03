@@ -1,40 +1,53 @@
-import React from 'react'
-import logo from './logo.svg'
-import tauriCircles from './tauri.svg'
-import tauriWord from './wordmark.svg'
-import './App.css'
+import ja from "date-fns/locale/ja";
+import React, { ChangeEvent, useState } from "react";
+import DatePicker, { registerLocale } from "react-datepicker"; // https://github.com/Hacker0x01/react-datepicker
+import "react-datepicker/dist/react-datepicker.css";
+
+registerLocale("ja", ja);
 
 function App() {
+  const [name, setName] = useState("二宮尊徳");
+  const [birthDay, setBirthDay] = useState(new Date("1787-09-04"));
+
+  const handleNameChanged = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const handleBirthDayChanged = (date: Date) => {
+    setBirthDay(date);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="inline-logo">
-          <img src={tauriCircles} className="App-logo rotate" alt="logo" />
-          <img src={tauriWord} className="App-logo smaller" alt="logo" />
+    <div>
+      <div style={{ padding: 10 }}>
+        <div>
+          <label htmlFor="name">名前</label>
+          <div>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              onChange={handleNameChanged}
+            />
+          </div>
         </div>
-        <a
-          className="App-link"
-          href="https://tauri.studio"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Tauri
-        </a>
-        <img src={logo} className="App-logo rotate" alt="logo" />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </header>
+        <div>
+          <label htmlFor="birthday">生年月日</label>
+          <DatePicker
+            dateFormat="yyyy/MM/dd"
+            locale="ja"
+            selected={birthDay}
+            onChange={handleBirthDayChanged}
+          />
+        </div>
+        <input type="button" value="送信" />
+      </div>
+      <div style={{ padding: 10 }}>
+        <input type="text" name="response" id="response" />
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
