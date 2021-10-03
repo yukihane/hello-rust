@@ -18,8 +18,8 @@ type Response = {
 };
 
 function App() {
-  const [name, setName] = useState("二宮尊徳");
-  const [birthDay, setBirthDay] = useState(new Date("1787-09-04"));
+  const [name, setName] = useState("新垣結衣");
+  const [birthDay, setBirthDay] = useState(new Date("1988-06-11"));
   const [message, setMessage] = useState("");
 
   const handleNameChanged = (e: ChangeEvent<HTMLInputElement>) => {
