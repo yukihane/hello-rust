@@ -7,9 +7,10 @@ use chrono::{DateTime, Datelike, Local, Utc};
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 struct PersonalData {
   name: String,
-  birthDay: DateTime<Utc>,
+  birth_day: DateTime<Utc>,
 }
 
 #[derive(Serialize, Debug)]
@@ -20,7 +21,7 @@ struct Response {
 #[tauri::command]
 fn greet(personal_data: PersonalData) -> Response {
   println!("recieve: {:?}", personal_data);
-  let age: i32 = calc_age(&personal_data.birthDay, &Local::now());
+  let age: i32 = calc_age(&personal_data.birth_day, &Local::now());
   let message = format!("こんにちは, {}({}歳)！", personal_data.name, age);
 
   Response { message }
