@@ -1,0 +1,5 @@
+== Hello Tauri
+
+* https://yukihane.github.io/blog/202110/03/hello-tauri/[Tauri を GUI にして Rust と React に入門する] - 発火後忘失
+
+で作成した、 https://tauri.studio/[Tauri] を用いたサンプルアプリケーションです。
