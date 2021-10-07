@@ -1,0 +1,17 @@
+== Rust のエラーハンドリングを学習する
+
+2021 年現在、 Rust のエラーハンドリング(の決定版)についてはまだ検討が進んでいる最中のようです。
+
+ステータスとしては 2020 年に書かれている説明はまだ古くはなっていない、ような状況に見えます。
+
+それらの資料を見ると、現時点では `thiserror` と `anyhow` を利用するのが良い、とあります。
+
+* https://ironoir.hatenablog.com/entry/2021/02/01/213921[Rustのエラーハンドリングにanyhowとthiserrorを使う - 色の輪]
+** 書籍 https://www.shuwasystem.co.jp/book/9784798061702.html[実践Rustプログラミング入門] に解説がある、とのこと(4-4 エラーハンドリングを追加する)
+* https://cha-shu00.hatenablog.com/entry/2020/12/08/060000[Rust エラー処理2020 - 電気ひつじ牧場]
+* https://stackoverflow.com/a/58337971/4506703[Rust proper error handling (auto convert from one error type to another with question mark) - Stack Overflow]
+* https://nick.groenen.me/posts/rust-error-handling/[Rust: Structuring and handling errors in 2020 - Nick&#39;s Blog and Digital Garden]
+
+この辺りで説明されている機能を試してみるリポジトリです。
+
+(おそらく、現在の私は `thiserror` が必要なほどではなく、 `anyhow` を利用すれば十分なのではないかと考えているので、こちらが中心になると思われます)
