@@ -13,7 +13,7 @@ RUN rm -f target/release/deps/todo*
 RUN cargo build --release
 
 
-FROM rust:1.56.0
+FROM debian:10.4
 
 COPY --from=builder /todo/target/release/todo /usr/local/bin/todo
 
