@@ -1,13 +1,20 @@
-FROM rust:1.56.0
+FROM rust:1.56.0 AS builder
 
 WORKDIR /todo
 
 COPY Cargo.toml Cargo.toml
-COPY ./src ./src
-COPY ./templates ./templates
-
+RUN mkdir src
+RUN echo "fn main(){}" > src/main.rs
 RUN cargo build --release
 
-RUN cargo install --path .
+COPY ./src ./src
+COPY ./templates ./templates
+RUN rm -f target/release/deps/todo*
+RUN cargo build --release
+
+
+FROM rust:1.56.0
+
+COPY --from=builder /todo/target/release/todo /usr/local/bin/todo
 
 CMD ["todo"]
