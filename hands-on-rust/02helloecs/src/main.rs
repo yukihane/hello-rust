@@ -16,6 +16,9 @@ struct Renderable {
     bg: RGB,
 }
 
+#[derive(Component)]
+struct LeftMover {}
+
 struct State {
     ecs: World,
 }
@@ -41,6 +44,7 @@ fn main() -> rltk::BError {
     let mut gs = State { ecs: World::new() };
     gs.ecs.register::<Position>();
     gs.ecs.register::<Renderable>();
+    gs.ecs.register::<LeftMover>();
 
     gs.ecs
         .create_entity()
@@ -50,6 +54,7 @@ fn main() -> rltk::BError {
             fg: RGB::named(rltk::YELLOW),
             bg: RGB::named(rltk::BLACK),
         })
+        .with(LeftMover {})
         .build();
 
     for i in 0..10 {
