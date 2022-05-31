@@ -19,6 +19,21 @@ struct Renderable {
 #[derive(Component)]
 struct LeftMover {}
 
+struct LeftWalkder {}
+
+impl<'a> System<'a> for LeftWalkder {
+    type SystemData = (ReadStorage<'a, LeftMover>, WriteStorage<'a, Position>);
+
+    fn run(&mut self, (lefty, mut pos): Self::SystemData) {
+        for (_lefty, pos) in (&lefty, &mut pos).join() {
+            pos.x -= 1;
+            if pos.x < 0 {
+                pos.x = 79;
+            }
+        }
+    }
+}
+
 struct State {
     ecs: World,
 }
