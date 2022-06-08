@@ -10,5 +10,5 @@ fn main() {
     };
 
     // rect1は{}です
-    println!("rect1 is {}", rect1);
+    println!("rect1 is {:?}", rect1);
 }
