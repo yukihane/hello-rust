@@ -1,3 +1,8 @@
+## 実行方法
+```
+NODE_OPTIONS=--openssl-legacy-provider npm run start
+```
+
 ## How to install
 
 ```sh
