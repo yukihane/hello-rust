@@ -22,6 +22,7 @@ lto = true
 #default = ["wee_alloc"]
 [dependencies]
 console_error_panic_hook = "0.1.7"
+getrandom = { version = "0.2.10", features = ["js"] }
 rand = "0.8.5"
 # The `wasm-bindgen` crate provides the bare minimum functionality needed
 # to interact with JavaScript.
