@@ -50,8 +50,20 @@ fn draw_triangle(context: &web_sys::CanvasRenderingContext2d, points: [(f64, f64
 }
 
 fn sierpinski(context: &web_sys::CanvasRenderingContext2d, points: [(f64, f64); 3], depth: u8) {
-    draw_triangle(&context, [(300.0, 0.0), (0.0, 600.0), (600.0, 600.0)]);
-    draw_triangle(&context, [(300.0, 0.0), (150.0, 300.0), (450.0, 300.0)]);
-    draw_triangle(&context, [(150.0, 300.0), (0.0, 600.0), (300.0, 600.0)]);
-    draw_triangle(&context, [(450.0, 300.0), (300.0, 600.0), (600.0, 600.0)]);
+    draw_triangle(context, points);
+    let depth = depth - 1;
+    if depth > 0 {
+        let [top, left, right] = points;
+        let left_middle = midpoint(top, left);
+        let right_middle = midpoint(top, right);
+        let bottom_middle = midpoint(left, right);
+
+        sierpinski(context, [top, left_middle, right_middle], depth);
+        sierpinski(context, [left_middle, left, bottom_middle], depth);
+        sierpinski(context, [right_middle, bottom_middle, right], depth);
+    }
+}
+
+fn midpoint(point_1: (f64, f64), point_2: (f64, f64)) -> (f64, f64) {
+    ((point_1.0 + point_2.0) / 2.0, (point_1.1 + point_2.1) / 2.0)
 }
