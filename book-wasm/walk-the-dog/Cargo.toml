@@ -42,7 +42,8 @@ features = [
     "Document",
     "HtmlCanvasElement",
     "CanvasRenderingContext2d",
-    "Element"
+    "Element",
+    "HtmlImageElement"
 ]
 
 # These crates are used for running unit tests.
