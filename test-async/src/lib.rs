@@ -1,14 +1,24 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+// use reqwest::Error;
+
+async fn my_func() -> Result<String, Box<dyn std::error::Error>> {
+    let body = reqwest::get("https://www.rust-lang.org")
+        .await?
+        .text()
+        .await?;
+
+    println!("body = {body:?}");
+
+    Ok("OK".to_string())
 }
 
 #[cfg(test)]
 mod tests {
+
     use super::*;
 
     #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    async fn it_works() {
+        let result = my_func().await.unwrap();
+        assert_eq!(result, "OK");
     }
 }
