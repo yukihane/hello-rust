@@ -16,7 +16,7 @@ mod tests {
 
     use super::*;
 
-    #[test]
+    #[tokio::test]
     async fn it_works() {
         let result = my_func().await.unwrap();
         assert_eq!(result, "OK");
