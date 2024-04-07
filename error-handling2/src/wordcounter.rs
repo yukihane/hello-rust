@@ -27,5 +27,10 @@ pub fn count_words<R: Read>(input: &mut R) -> Result<u32, WordCountError> {
             wordcount += 1;
         }
     }
+
+    if wordcount == 0 {
+        return Err(WordCountError::EmptySource);
+    }
+
     Ok(wordcount)
 }
