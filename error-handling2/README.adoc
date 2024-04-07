@@ -1,0 +1,3 @@
+https://nick.groenen.me/posts/rust-error-handling/ の写経。
+
+ちなみにこの記事は https://stackoverflow.com/a/58337971 のリンクから見つけました。
