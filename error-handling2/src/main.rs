@@ -1,26 +1,8 @@
-use std::env;
-use std::error::Error;
-use std::fs::File;
-use std::io::prelude::*;
-use std::io::BufReader;
+use error_handling2::run;
 
-fn count_words<R: Read>(input: &mut R) -> Result<u32, Box<dyn Error>> {
-    let reader = BufReader::new(input);
-    let mut wordcount = 0;
-    for line in reader.lines() {
-        for _word in line?.split_whitespace() {
-            wordcount += 1;
-        }
+fn main() {
+    if let Err(err) = run() {
+        eprintln!("Error: {:?}", err);
+        std::process::exit(1);
     }
-    Ok(wordcount)
-}
-
-fn main() -> Result<(), Box<dyn Error>> {
-    for filename in env::args().skip(1).collect::<Vec<String>>() {
-        let mut reader = File::open(&filename)?;
-
-        let wordcount = count_words(&mut reader)?;
-        println!("{} {}", wordcount, filename);
-    }
-    Ok(())
 }
