@@ -1,4 +1,3 @@
-use std::error::Error;
 use std::io::prelude::*;
 use std::io::BufReader;
 use thiserror::Error;
@@ -20,7 +19,7 @@ pub enum WordCountError {
     IOError(#[from] std::io::Error),
 }
 
-pub fn count_words<R: Read>(input: &mut R) -> Result<u32, Box<dyn Error>> {
+pub fn count_words<R: Read>(input: &mut R) -> Result<u32, WordCountError> {
     let reader = BufReader::new(input);
     let mut wordcount = 0;
     for line in reader.lines() {
