@@ -434,6 +434,7 @@ dependencies = [
  "futures",
  "js-sys",
  "wasm-bindgen",
+ "wasm-bindgen-futures",
  "wasm-bindgen-test",
  "web-sys",
 ]
