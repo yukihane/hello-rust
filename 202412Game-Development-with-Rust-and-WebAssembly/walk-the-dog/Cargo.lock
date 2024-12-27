@@ -432,6 +432,7 @@ name = "without-a-bundler"
 version = "0.1.0"
 dependencies = [
  "futures",
+ "js-sys",
  "wasm-bindgen",
  "wasm-bindgen-test",
  "web-sys",
