@@ -9,7 +9,7 @@ crate-type = ["cdylib"]
 [dependencies]
 console_error_panic_hook = "0.1.7"
 wasm-bindgen = "0.2.99"
-web-sys = { version = "0.3.76", features = ["console"] }
+web-sys = { version = "0.3.76", features = ["CanvasRenderingContext2d", "Document", "Element", "HtmlCanvasElement", "Window", "console"] }
 
 [dev-dependencies]
 futures = "0.3.31"
