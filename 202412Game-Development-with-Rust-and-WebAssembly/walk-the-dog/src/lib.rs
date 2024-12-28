@@ -99,9 +99,10 @@ pub fn main_js() -> Result<(), JsValue> {
         let (success_tx, success_rx) = futures::channel::oneshot::channel::<()>();
         let image = web_sys::HtmlImageElement::new().unwrap();
 
-        let callback = Closure::once(|| {
+        let callback = Closure::once(move || {
             success_tx.send(());
         });
+
         image.set_onload(Some(callback.as_ref().unchecked_ref()));
         image.set_src("walk_the_dog_assets-0.0.7/resized/rhb/Idle (1).png");
 
