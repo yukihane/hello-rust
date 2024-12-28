@@ -82,3 +82,40 @@ npm install
 それを行うには非同期関数が必要になる。
 
 とあるが、キャッシュが効いていると？画像は想定に反して表示されるようだ。
+
+### p.45-46 wasm-bindgen into_serde の deprecated 対応
+
+> warning: use of deprecated method `wasm_bindgen::JsValue::into_serde`: causes dependency cycles, use `serde-wasm-bindgen` or `gloo_utils::format::JsValueSerdeExt` instead
+
+という警告メッセージが出るので [`serde-wasm-bindgen`](https://docs.rs/serde-wasm-bindgen/latest/serde_wasm_bindgen/) を利用する。
+
+```diff
+diff --git a/202412Game-Development-with-Rust-and-WebAssembly/walk-the-dog/Cargo.toml b/202412Game-Development-with-Rust-and-WebAssembly/walk-the-dog/Cargo.toml
+index 5c155b6..f5a90d3 100644
+--- a/202412Game-Development-with-Rust-and-WebAssembly/walk-the-dog/Cargo.toml
++++ b/202412Game-Development-with-Rust-and-WebAssembly/walk-the-dog/Cargo.toml
+@@ -12,6 +12,7 @@ futures = "0.3.31"
+ getrandom = { version = "0.2.15", features = ["js"] }
+ rand = "0.8.5"
+ serde = { version = "1.0.217", features = ["derive"] }
++serde-wasm-bindgen = "0.6.5"
+ wasm-bindgen = { version = "0.2.99", features = ["serde-serialize"] }
+ wasm-bindgen-futures = "0.4.49"
+ web-sys = { version = "0.3.76", features = ["CanvasRenderingContext2d", "Document", "Element", "HtmlCanvasElement", "HtmlImageElement", "Response", "Window", "console"] }
+```
+
+```diff
+diff --git a/202412Game-Development-with-Rust-and-WebAssembly/walk-the-dog/src/lib.rs b/202412Game-Development-with-Rust-and-WebAssembly/walk-the-dog/src/lib.rs
+index f3f0d5b..af3d01e 100644
+--- a/202412Game-Development-with-Rust-and-WebAssembly/walk-the-dog/src/lib.rs
++++ b/202412Game-Development-with-Rust-and-WebAssembly/walk-the-dog/src/lib.rs
+@@ -152,8 +152,7 @@ pub fn main_js() -> Result<(), JsValue> {
+             .await
+             .expect("Could not fetch rhb.json");
+
+-        let sheet: Sheet = json
+-            .into_serde()
++        let sheet: Sheet = serde_wasm_bindgen::from_value(json)
+             .expect("Could not convert rhb.json into a Sheet structure");
+     });
+```

@@ -152,8 +152,7 @@ pub fn main_js() -> Result<(), JsValue> {
             .await
             .expect("Could not fetch rhb.json");
 
-        let sheet: Sheet = json
-            .into_serde()
+        let sheet: Sheet = serde_wasm_bindgen::from_value(json)
             .expect("Could not convert rhb.json into a Sheet structure");
     });
 
