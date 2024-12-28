@@ -7,6 +7,18 @@
 - [templateのコード](https://github.com/rustwasm/rust-webpack-template/tree/master/template)
   - 書籍の最初の方ではこのコードをもとに変更している
 
+## 誤植(正誤表にあるもの以外)
+
+### p.10 1.4 HTML Canvasを用いたスクリーンへの描画
+
+誤
+
+> このコメントと[cfg(debug_annotations)]アノテーションを削除しよう
+
+正
+
+> このコメントと[cfg(debug_assersions)]アノテーションを削除しよう
+
 ## NOTE
 
 ### npm init rust-webpack が動かない
