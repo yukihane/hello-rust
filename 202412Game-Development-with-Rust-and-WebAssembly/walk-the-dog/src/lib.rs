@@ -62,7 +62,7 @@ fn draw_triangle(
     color: (u8, u8, u8),
 ) {
     let color_str = format!("rgb({},{},{})", color.0, color.1, color.2);
-    context.set_fill_style(&wasm_bindgen::JsValue::from_str(&color_str));
+    context.set_fill_style_str(&color_str);
 
     let [top, left, right] = points;
     context.move_to(top.0, top.1);

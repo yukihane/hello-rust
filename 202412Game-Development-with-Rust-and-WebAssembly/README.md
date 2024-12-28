@@ -64,3 +64,15 @@ rm -rf www/.git
 cd www
 npm install
 ```
+
+この問題については結局bunlderを使わない方法で解消した。
+- ref. https://github.com/yukihane/hello-rust/tree/main/202412hello-wasm
+
+### p.25 1.4.3 context.set_fill_style() が deprecated
+
+```
+     let color_str = format!("rgb({},{},{})", color.0, color.1, color.2);
+-    context.set_fill_style(&wasm_bindgen::JsValue::from_str(&color_str));
++    context.set_fill_style_str(&color_str);
+```
+
