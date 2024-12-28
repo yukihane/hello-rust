@@ -9,6 +9,17 @@ use wasm_bindgen::JsCast;
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
+fn draw_triangle(context: &web_sys::CanvasRenderingContext2d, points: [(f64, f64); 3]) {
+    let [top, left, right] = points;
+    context.move_to(top.0, top.1);
+    context.begin_path();
+    context.line_to(left.0, left.1);
+    context.line_to(right.0, right.1);
+    context.line_to(top.0, top.1);
+    context.close_path();
+    context.stroke();
+}
+
 // This is like the `main` function, except for JavaScript.
 #[wasm_bindgen(start)]
 pub fn main_js() -> Result<(), JsValue> {
@@ -29,14 +40,7 @@ pub fn main_js() -> Result<(), JsValue> {
         .dyn_into::<web_sys::CanvasRenderingContext2d>()
         .unwrap();
 
-    context.move_to(300.0, 0.0);
-    context.begin_path();
-    context.line_to(0.0, 600.0); // bottom left of triangle 左下の頂点
-    context.line_to(600.0, 600.0); // bottom right of triangle 右下の頂点
-    context.line_to(300.0, 0.0); // back to top of triangle 上の頂点に戻る
-    context.close_path();
-    context.stroke();
-    context.fill();
+    draw_triangle(&context, [(300.0, 0.0), (0.0, 600.0), (600.0, 600.0)]);
 
     Ok(())
 }
