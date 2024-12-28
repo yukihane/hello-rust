@@ -4,6 +4,8 @@
 
 - 書籍情報: https://www.oreilly.co.jp/books/9784814400393/
 - コード: https://github.com/PacktPublishing/Game-Development-with-Rust-and-WebAssembly
+- [templateのコード](https://github.com/rustwasm/rust-webpack-template/tree/master/template)
+  - 書籍の最初の方ではこのコードをもとに変更している
 
 ## NOTE
 
