@@ -1,4 +1,5 @@
 use wasm_bindgen::prelude::*;
+use wasm_bindgen::JsCast;
 use web_sys::console;
 
 // When the `wee_alloc` feature is enabled, this uses `wee_alloc` as the global
@@ -14,8 +15,29 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 pub fn main_js() -> Result<(), JsValue> {
     console_error_panic_hook::set_once();
 
-    // Your code goes here!
-    console::log_1(&JsValue::from_str("Hello world!"));
+    let window = web_sys::window().unwrap();
+    let document = window.document().unwrap();
+    let canvas = document
+        .get_element_by_id("canvas")
+        .unwrap()
+        .dyn_into::<web_sys::HtmlCanvasElement>()
+        .unwrap();
+
+    let context = canvas
+        .get_context("2d")?
+        .unwrap()
+        .unwrap()
+        .dyn_into::<web_sys::CanvasRenderingContext2d>()
+        .unwrap();
+
+    context.move_to(300.0, 0.0);
+    context.begin_path();
+    context.line_to(0.0, 600.0); // bottom left of triangle 左下の頂点
+    context.line_to(600.0, 600.0); // bottom right of triangle 右下の頂点
+    context.line_to(300.0, 0.0); // back to top of triangle 上の頂点に戻る
+    context.close_path();
+    context.stroke();
+    context.fill();
 
     Ok(())
 }
