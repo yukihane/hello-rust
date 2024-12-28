@@ -1,8 +1,10 @@
+use std::collections::HashMap;
 use std::rc::Rc;
 use std::sync::Mutex;
 
 use rand::prelude::*;
 use rand::prelude::*;
+use serde::Deserialize;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
 
@@ -14,6 +16,22 @@ use wasm_bindgen::JsCast;
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
+#[derive(Deserialize)]
+struct Rect {
+    x: u16,
+    y: u16,
+    w: u16,
+    h: u16,
+}
+#[derive(Deserialize)]
+struct Cell {
+    frame: Rect,
+}
+
+#[derive(Deserialize)]
+struct Sheet {
+    frames: HashMap<String, Cell>,
+}
 fn midpoint(point_1: (f64, f64), point_2: (f64, f64)) -> (f64, f64) {
     ((point_1.0 + point_2.0) / 2.0, (point_1.1 + point_2.1) / 2.0)
 }
@@ -128,6 +146,15 @@ pub fn main_js() -> Result<(), JsValue> {
             (0, 255, 0),
             5,
         );
+
+        context.draw_image_with_html_image_element(&image, 0.0, 0.0);
+        let json = fetch_json("rhb.json")
+            .await
+            .expect("Could not fetch rhb.json");
+
+        let sheet: Sheet = json
+            .into_serde()
+            .expect("Could not convert rhb.json into a Sheet structure");
     });
 
     Ok(())
