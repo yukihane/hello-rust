@@ -148,7 +148,7 @@ pub fn main_js() -> Result<(), JsValue> {
         );
 
         context.draw_image_with_html_image_element(&image, 0.0, 0.0);
-        let json = fetch_json("rhb.json")
+        let json = fetch_json("walk_the_dog_assets-0.0.7/sprite_sheets/rhb.json")
             .await
             .expect("Could not fetch rhb.json");
 
