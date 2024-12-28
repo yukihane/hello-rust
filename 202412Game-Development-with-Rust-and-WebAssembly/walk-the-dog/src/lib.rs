@@ -1,9 +1,10 @@
+#[macro_use]
+mod browser;
+
 use std::collections::HashMap;
 use std::rc::Rc;
 use std::sync::Mutex;
 
-use rand::prelude::*;
-use rand::prelude::*;
 use serde::Deserialize;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
