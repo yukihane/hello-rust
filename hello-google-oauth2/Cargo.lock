@@ -412,6 +412,8 @@ name = "hello-google-oauth2"
 version = "0.1.0"
 dependencies = [
  "google-drive3",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
