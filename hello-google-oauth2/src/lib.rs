@@ -1,7 +1,4 @@
-use google_drive3::{
-    DriveHub, Error, hyper_rustls, hyper_util,
-    yup_oauth2::{self, InstalledFlowAuthenticator, InstalledFlowReturnMethod},
-};
+use google_drive3::yup_oauth2::{self, InstalledFlowAuthenticator, InstalledFlowReturnMethod};
 
 pub async fn oauth() {
     // Read application secret from a file. Sometimes it's easier to compile it directly into
@@ -14,12 +11,11 @@ pub async fn oauth() {
     // authentication tokens are persisted to a file named tokencache.json. The
     // authenticator takes care of caching tokens to disk and refreshing tokens once
     // they've expired.
-    let mut auth =
-        InstalledFlowAuthenticator::builder(secret, InstalledFlowReturnMethod::HTTPRedirect)
-            .persist_tokens_to_disk("tokencache.json")
-            .build()
-            .await
-            .unwrap();
+    let auth = InstalledFlowAuthenticator::builder(secret, InstalledFlowReturnMethod::HTTPRedirect)
+        .persist_tokens_to_disk("tokencache.json")
+        .build()
+        .await
+        .unwrap();
 
     let scopes = &["https://www.googleapis.com/auth/drive.file"];
 
