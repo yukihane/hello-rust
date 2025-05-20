@@ -21,7 +21,7 @@ pub async fn oauth() {
             .await
             .unwrap();
 
-    let scopes = &["https://www.googleapis.com/auth/drive.appfolder"];
+    let scopes = &["https://www.googleapis.com/auth/drive.file"];
 
     // token(<scopes>) is the one important function of this crate; it does everything to
     // obtain a token that can be sent e.g. as Bearer token.
