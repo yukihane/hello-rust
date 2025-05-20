@@ -6,3 +6,19 @@
 
 - [Rust で GoogleDrive を操作する - Zenn](https://zenn.dev/nodamushi/articles/384e104b6497f2)
 - [Method to retrieve the OAuth URL or opening the URL in the browser using the open crate #206](https://github.com/dermesser/yup-oauth2/issues/206)
+
+## 実行方法
+
+WSL 環境では `wslu` をインストールしておく:
+
+```
+sudo apt install wslu
+```
+
+その後、
+
+```
+cargo run
+```
+
+を実行するとウェブブラウザーが開く。
