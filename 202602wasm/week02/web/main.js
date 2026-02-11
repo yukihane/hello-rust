@@ -6,5 +6,5 @@ const button = document.getElementById("run");
 await init();
 
 button.addEventListener("click", () => {
-  output.textContent = greet();
+  output.textContent = greet("WebAssembly");
 });
