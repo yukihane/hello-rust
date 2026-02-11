@@ -1,8 +1,12 @@
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn greet(name: &str) -> String {
-    format!("Hello, {}!", name)
+pub fn greet(name: &str) -> Result<String, JsValue> {
+    if name.is_empty() {
+        Err(JsValue::from_str("Name cannot be empty"))
+    } else {
+        Ok(format!("Hello, {}!", name))
+    }
 }
 
 #[wasm_bindgen]

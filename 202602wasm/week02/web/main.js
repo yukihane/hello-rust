@@ -13,7 +13,11 @@ await init();
 
 greetButton.addEventListener("click", () => {
   const name = nameInput.value;
-  output.textContent = `greet("${name}") => ${greet(name)}`;
+  try {
+    output.textContent = `greet("${name}") => ${greet(name)}`;
+  } catch (err) {
+    output.textContent = `greet("${name}") => error: ${String(err)}`;
+  }
 });
 
 sumButton.addEventListener("click", () => {
